@@ -1,1 +1,0 @@
-# simple-sinatra-app-aws
