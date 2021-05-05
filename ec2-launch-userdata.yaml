@@ -1,0 +1,72 @@
+---
+Resources:
+  # an ec2 instance for sinstra server
+    ServerSecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupDescription: Enable SSH access via port 22; Enable HTTP via port 80
+        SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+    MyEIP:
+      Type: AWS::EC2::EIP
+      Properties:
+        InstanceId: !Ref MyInstance
+        
+    MyInstance:
+      Type: AWS::EC2::Instance
+      Properties:
+        AvailabilityZone: ap-southeast-2a
+        ImageId: ami-007b2c28096a63f37
+        InstanceType: t2.micro
+        SecurityGroups:
+          - !Ref ServerSecurityGroup
+        UserData:
+          Fn::Base64: !Sub |
+              #!/bin/bash
+              sudo yum -y update
+              # Create User and Group sinatra app
+              echo "Create and confiure user for sinatra app"
+              deployUser="sinatraAdmin"
+              deployGrp="sinatraAdminGrp"
+              sudo useradd $deployUser
+              sudo groupadd $deployGrp
+              sudo usermod -a -G $deployGrp $deployUser
+              echo "sinatraAdmin ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+
+              # Install rvm and ruby 
+              sudo gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+              \curl -sSL https://get.rvm.io | sudo bash -s stable --ruby=2.6.0
+              source /usr/local/rvm/scripts/rvm
+              sudo usermod -a -G rvm ec2-user
+              sudo usermod -a -G rvm $deployUser
+              gem install rubygems-bundler
+              gem install mustermann -v '1.1.1'
+              gem install sinatra --no-document
+
+              # Create app path and configure permission
+              sudo mkdir -p /var/www/simple-sinatra-app
+              sudo chown -R $deployUser /var/www/simple-sinatra-app
+              sudo chgrp -R $deployGrp /var/www/simple-sinatra-app
+              sudo chmod -R 2770 /var/www/simple-sinatra-app
+
+              # Obtain source code
+              sudo yum install -y git
+              sudo git clone https://github.com/rea-cruitment/simple-sinatra-app.git  /var/www/simple-sinatra-app
+
+
+              # Deploy Application
+              sudo env PATH=$PATH su $deployUser << eol
+              cd /var/www/simple-sinatra-app
+              bundle install 
+              rvmsudo rackup -p 80 -E production &
+              eol
+
+
+
+
+
+  
