@@ -40,5 +40,29 @@ aws cloudformation deploy --template-file sinatra-server-launch.yaml --stack-nam
 ```bash
 sh sinatra-deploy.sh
 ```
+---
+**NOTE:**  
+If you would like to run the command outside the source code directory, just put the path in front of the template yaml file.
+```
+--template-file /full_path/sinatra-server-launch.yaml
+```
+---
 ## Check your stack in the console
-#### Go to Cloudformation home page
+#### Go to Cloudformation > Stacks
+###### Check stack deploy status: 
+![](assets/cloudformation-inprogress.png)
+![](assets/cloudformation-complete.png)
+#### Go to sinatra-app
+###### check stack info & events for deployment details
+![](assets/stack-info.png)
+![](assets/stack-events.png)
+
+#### Go to EC2 > Instances
+![](assets/ec2-instance-info.png)
+
+#### Copy public DNS or public IP Address to browser
+![](assets/app-page.png)
+---
+Sinatra App is running!
+
+## Summary
