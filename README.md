@@ -32,11 +32,11 @@ git clone https://github.com/junyao-d/simple-sinatra-app-aws.git
 cd simple-sinatra-app-aws/
 ```
 #### Run following CloudFormation deploy command
-###### In Windows PowerShell
+###### In Windows PowerShell terminal
 ```
 aws cloudformation deploy --template-file sinatra-server-launch.yaml --stack-name sinatra-app
 ```
-###### In Linux/macOS/Windows Subsystem 
+###### In Linux/macOS/Windows Subsystem terminal
 ```bash
 sh sinatra-deploy.sh
 ```
@@ -66,3 +66,26 @@ If you would like to run the command outside the source code directory, just put
 Sinatra App is running!
 
 ## Summary
+
+#### Assumption 
+Users have basic cloud knowledge
+
+#### Reason for choosing AWS
+- Easy to deploy infrastructure with CloudFormation template (infrastructure as code)
+- Easy to configure security rules
+- Unified resources provision (Allow users to access the same resources such as VM images, load balancer)
+
+
+#### Short comings and corresponding solutions
+###### Low availability
+Only one infrastructure(ec2 instance) is deployed, which may lead to single point of failure.
+
+**Solution**:  
+Launch infrastructure with an Elastic Load Balancer, deploy at least one more ec2 instance in the target group.
+
+###### Less secure network traffic
+Current application is deployed on port 80, so the application is accessed via http by default, which is less scure than https.
+
+**Solution:**  
+Configure Elastic Load Balancer to redirect http to https.  
+[Redirect HTTP requests to HTTPS](https://aws.amazon.com/premiumsupport/knowledge-center/elb-redirect-http-to-https-using-alb/)
