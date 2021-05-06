@@ -16,7 +16,7 @@
 User group requires full access to following services:  
 >**IAM, EC2, CloudFormation, S3, CloudWatch**
 
-User group can also be configured during iam user creation session.
+User group can also be created and configured during iam user creation session.
 
 #### 4.Create an IAM user with access key (console recommended), and add IAM user to user group 
 [Create IAM users(console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console)
