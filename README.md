@@ -12,18 +12,23 @@
 - **macOS**  
 [Install the AWS CLI version 2 on macOS](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html)
 
-#### 3.Create an IAM user with access key (console recommended)  
+#### 3. Create a user group.
+User group requires full access to following services:  
+>**IAM, EC2, CloudFormation, S3, CloudWatch**
+
+User group can also be configured during iam user creation session.
+
+#### 4.Create an IAM user with access key (console recommended), and add IAM user to user group 
 [Create IAM users(console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console)
 ![](assets/create-iam-user.png)
 
 
-
-#### 4. Create a user group and add IAM user to user group. 
-User group requires full access to following services:  
->**IAM, EC2, CloudFormation, S3, CloudWatch**
 ##### 5. Configure AWS CLI with acccess key   
 [- Get Access Key](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html)  
 [- Configure Access Key](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+
+**Note:** Configure aws Region to **ap-southeast-2**
+
 
 ## Deploy Sinatra Server
 #### Download code from repo and go into the repo directory
@@ -38,7 +43,7 @@ aws cloudformation deploy --template-file sinatra-server-launch.yaml --stack-nam
 ```
 ###### In Linux/macOS/Windows Subsystem terminal
 ```bash
-sh sinatra-deploy.sh
+sh aws-stack-deploy.sh
 ```
 ---
 **NOTE:**  
