@@ -34,9 +34,11 @@ cd simple-sinatra-app-aws/
 #### Run following CloudFormation deploy command
 ###### In Windows PowerShell
 ```
-aws cloudformation deploy --template-file ec2-launch-userdata.yaml --stack-name sinatra-app
+aws cloudformation deploy --template-file sinatra-server-launch.yaml --stack-name sinatra-app
 ```
 ###### In Linux/macOS/Windows Subsystem 
 ```bash
 sh sinatra-deploy.sh
 ```
+## Check your stack in the console
+#### Go to Cloudformation home page
