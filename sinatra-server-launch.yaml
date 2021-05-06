@@ -29,7 +29,6 @@ Resources:
               #!/bin/bash
               sudo yum -y update
               # Create User and Group sinatra app
-              echo "Create and confiure user for sinatra app"
               deployUser="sinatraAdmin"
               deployGrp="sinatraAdminGrp"
               sudo useradd $deployUser
