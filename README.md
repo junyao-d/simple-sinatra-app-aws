@@ -69,7 +69,8 @@ Sinatra App is running!
 
 #### Assumption 
 - Users have basic cloud knowledge
-- Users have master/visa card and willing to pay
+- Users have master/visa card and users are willing to pay
+- Users do not have resistance to use Amazon services
 
 #### Reason for choosing AWS
 - Easy to deploy infrastructure with CloudFormation template (infrastructure as code)
