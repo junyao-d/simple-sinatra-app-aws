@@ -68,21 +68,22 @@ Sinatra App is running!
 ## Summary
 
 #### Assumption 
-Users have basic cloud knowledge
+- Users have basic cloud knowledge
 
 #### Reason for choosing AWS
 - Easy to deploy infrastructure with CloudFormation template (infrastructure as code)
+- There is no need to install extra software such as virtual box and vm base images
 - Easy to configure security rules
 - Unified resources provision (Allow users to access the same resources such as VM images, load balancer)
 
 
 #### Short comings and corresponding solutions
-- Low availability
+- Low availability and elasticity
   
 Only one infrastructure(ec2 instance) is deployed, which may lead to single point of failure.
 
 **Solution**:  
-Launch infrastructure with an Elastic Load Balancer, deploy at least one more ec2 instance in the target group.
+Launch infrastructure with an application load balancer and auto scaling group. Deploy at least one more ec2 instance in the target group if there is no auto scaling group. 
 
 - Less secure network traffic  
 
@@ -91,3 +92,13 @@ Current application is deployed on port 80, so the application is accessed via h
 **Solution:**  
 Configure Elastic Load Balancer to redirect http to https.  
 [Redirect HTTP requests to HTTPS](https://aws.amazon.com/premiumsupport/knowledge-center/elb-redirect-http-to-https-using-alb/)
+
+
+- Lack of monitoring actions/notification  
+
+The deployment does not setup any monitoring mechanism. Failure of server may not be notified immediately if it happens.
+
+**Solution:**   
+Setup CloudWatch Alarms to trigger notification(such as SNS) for specific metrix or server failure. 
+
+Configure eventbridge to take action when server encounters exceptions. 
