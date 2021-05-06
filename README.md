@@ -77,13 +77,15 @@ Users have basic cloud knowledge
 
 
 #### Short comings and corresponding solutions
-###### Low availability
+- Low availability
+  
 Only one infrastructure(ec2 instance) is deployed, which may lead to single point of failure.
 
 **Solution**:  
 Launch infrastructure with an Elastic Load Balancer, deploy at least one more ec2 instance in the target group.
 
-###### Less secure network traffic
+- Less secure network traffic  
+
 Current application is deployed on port 80, so the application is accessed via http by default, which is less scure than https.
 
 **Solution:**  
