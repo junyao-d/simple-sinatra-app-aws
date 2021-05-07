@@ -16,7 +16,7 @@
 User group requires full access to following services:  
 >**IAM, EC2, CloudFormation, S3, CloudWatch**
 
-**NOTE:** User group can also be created and configured during iam user creation session.
+**NOTE:** User group can also be created and configured during iam user creation section.
 ![](assets/create-user-group.png)
 ![](assets/attach-permissions.png)
 
