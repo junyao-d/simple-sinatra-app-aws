@@ -29,6 +29,11 @@ User group can also be created and configured during iam user creation session.
 
 **Note:** Configure aws Region to **ap-southeast-2**
 
+**Hint:** Why create iam user and configure iam user access key?
+> Root user access keys provide unrestricted access to your entire AWS account. If you need long-term access keys, we recommend creating a new IAM user with limited permissions and generating access keys for that user instead. Learn more about: 
+> [Best practices for managing AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html)
+
+
 
 ## Deploy Sinatra Server
 #### Download code from repo and go into the repo directory
